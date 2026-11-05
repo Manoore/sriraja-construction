@@ -1,0 +1,818 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SriRaja Construction</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="SriRaja Construction is a Hyderabad builder of homes, apartments and commercial buildings.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..500&family=IBM+Plex+Mono:wght@400&family=Mukta:wght@300;400;500;600&display=swap">
+<style>
+/* Layout concept: a single dark look, like gold foil on black card. The name runs the full width of the page,
+   the building draws itself in gold, and projects sit in an uneven two-column gallery of photo slots. */
+:root {
+  color-scheme: dark;
+  --bg: #0F0D0A; --surface: #17140F; --raised: #1F1B14; --ink: #F2EBDD; --muted: #AFA591; --line: #3A3227;
+  --gold: #CFAB63; --gold-bright: #E8C988; --on-gold: #17130B;
+  --draw: #CFAB63; --draw-faint: #1E1A13; --plaster: #2A241A; --conc: #3F3726; --brick: #7D422E;
+  --brick-line: #4F2A1D; --glass: #1C2A2C; --soil: #3B3122; --bamboo: #8F7A4F; --tank: #6E624A;
+  --display: "Bodoni Moda", "Didot", "Bodoni MT", Georgia, serif;
+  --body: "Mukta", "Noto Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+html { scroll-padding-top: 76px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 300 1.0625rem/1.65 var(--body); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap { max-width: 1240px; margin-inline: auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3, p, ol, ul, dl, dd, figure { margin: 0; padding: 0; }
+ol, ul { list-style: none; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; }
+h2 { font-size: clamp(2.2rem, 4.6vw, 3.8rem); line-height: 1.08; }
+h3 { font-size: 1.5rem; line-height: 1.2; }
+em { font-style: italic; color: var(--gold-bright); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+.label { font: 500 .74rem/1.4 var(--body); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+.todo { display: inline-block; font: 400 .92rem/1.4 var(--body); padding: 1px 8px; border: 1px dashed var(--gold); color: var(--gold-bright); }
+
+.draft { border-bottom: 1px solid var(--line); color: var(--muted); font-size: .84rem; line-height: 1.4; }
+.draft .wrap { padding-block: 7px; }
+
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: var(--bg); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.mark { font: 400 1.35rem/1 var(--display); text-decoration: none; }
+.top nav { display: flex; align-items: center; gap: 28px; }
+.top nav a { text-decoration: none; font-size: .95rem; font-weight: 400; color: var(--muted); }
+.top nav a:hover { color: var(--gold-bright); }
+.top nav a.call { color: var(--gold-bright); border: 1px solid var(--gold); padding: 5px 16px; }
+.top nav a.call:hover { background: var(--gold); color: var(--on-gold); }
+@media (max-width: 720px) {
+  html { scroll-padding-top: 104px; }
+  .top .wrap { flex-wrap: wrap; gap: 4px 16px; padding-block: 8px 2px; }
+  .top nav { width: 100%; min-width: 0; gap: 18px; overflow-x: auto; white-space: nowrap; padding-block: 6px 8px; scrollbar-width: none; }
+  .top nav a { flex: none; }
+  .top nav a.call { order: -1; padding: 3px 12px; }
+}
+
+.hero { padding-block: 44px 72px; }
+.hero h1 { font-size: clamp(2.8rem, 9.1vw, 7.3rem); line-height: 1.02; letter-spacing: -.01em; padding-bottom: 26px; border-bottom: 1px solid var(--gold); min-width: 0; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 8fr); gap: 48px; padding-top: 34px; align-items: start; }
+.pitch { display: grid; gap: 22px; }
+.pitch h2 { font-style: italic; color: var(--gold-bright); font-size: clamp(2rem, 3.8vw, 3.2rem); }
+.pitch p { max-width: 40ch; font-size: 1.15rem; }
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { font: 500 1rem/1 var(--body); padding: 14px 24px; text-decoration: none; border: 1px solid var(--gold); background: var(--gold); color: var(--on-gold); cursor: pointer; }
+.btn:hover { background: var(--gold-bright); border-color: var(--gold-bright); }
+.btn.ghost { background: transparent; color: var(--gold-bright); }
+.btn.ghost:hover { background: var(--gold); border-color: var(--gold); color: var(--on-gold); }
+.pitch ul { display: grid; gap: 8px; border-top: 1px solid var(--line); padding-top: 18px; font-size: 1rem; }
+.pitch li { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 10px; align-items: baseline; }
+.pitch li span { font: 500 .7rem/1.4 var(--body); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+@media (max-width: 940px) { .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; } }
+@media (max-width: 700px) { .hero { padding-block: 28px 52px; } .hero h1 { font-size: 14.2vw; } }
+
+.draw svg { display: block; width: 100%; height: auto; }
+.stages { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0 6px; margin-top: 10px; }
+.stages button { appearance: none; background: transparent; color: var(--muted); border: 0; border-top: 2px solid var(--line); padding: 9px 2px 8px; font: 400 .84rem/1.2 var(--body); text-align: left; cursor: pointer; display: grid; gap: 2px; align-content: start; min-height: 44px; width: 100%; }
+.stages button b { font: 400 1rem/1.1 var(--display); }
+.stages button:hover { color: var(--ink); }
+.stages button.done { border-top-color: var(--gold); }
+.stages button[aria-current="step"] { border-top-color: var(--gold-bright); color: var(--gold-bright); }
+@media (max-width: 640px) { .stages .t { display: none; } .stages button { justify-items: center; text-align: center; } .stages button b { font-size: 1.1rem; } }
+.stage-note { padding-top: 10px; display: grid; gap: 2px; min-height: 104px; align-content: start; }
+.stage-note p { max-width: 62ch; color: var(--muted); }
+
+svg .d { fill: none; stroke: var(--draw); stroke-width: 1; }
+svg .dh { fill: none; stroke: var(--draw); stroke-width: 1.5; }
+svg .fa { fill: none; stroke: var(--draw-faint); stroke-width: 1; }
+svg .pl { fill: var(--plaster); stroke: var(--draw); stroke-width: 1; }
+svg .co { fill: var(--conc); stroke: var(--draw); stroke-width: 1; }
+svg .gl { fill: var(--glass); stroke: var(--draw); stroke-width: .8; }
+svg .so { fill: var(--soil); opacity: .55; stroke: none; }
+svg .pit { fill: var(--bg); stroke: var(--draw); stroke-width: 1; stroke-dasharray: 4 3; }
+svg .bk { fill: var(--brick); }
+svg .bl { fill: none; stroke: var(--brick-line); stroke-width: 1; }
+svg .ba { fill: none; stroke: var(--bamboo); stroke-width: 1.6; }
+svg .ta { fill: var(--tank); stroke: none; }
+svg .ac { fill: var(--gold-bright); stroke: none; }
+svg .lit { fill: var(--gold-bright); stroke: none; opacity: .92; filter: drop-shadow(0 0 6px var(--gold)); }
+svg .tr { fill: var(--raised); stroke: var(--draw); stroke-width: 1; }
+svg text { font-family: var(--mono); fill: var(--muted); stroke: none; }
+.layer { opacity: 0; transition: opacity .32s ease; }
+.layer.on { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .layer { transition: none; } }
+
+section { padding-block: 84px; }
+@media (max-width: 700px) { section { padding-block: 56px; } }
+.head { display: grid; gap: 12px; margin-bottom: 36px; max-width: 62ch; }
+.head p:not(.label) { color: var(--muted); }
+.band { background: var(--surface); border-block: 1px solid var(--line); }
+
+.filters { display: flex; flex-wrap: wrap; gap: 6px 24px; margin-bottom: 26px; }
+.filters button { appearance: none; background: transparent; color: var(--muted); border: 0; border-bottom: 1px solid transparent; padding: 4px 0; font: 400 1rem/1.3 var(--body); cursor: pointer; }
+.filters button:hover { color: var(--ink); }
+.filters button[aria-pressed="true"] { color: var(--gold-bright); border-bottom-color: var(--gold-bright); }
+.work { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 44px 28px; }
+.card { grid-column: span 5; display: grid; gap: 14px; align-content: start; min-width: 0; }
+.card:nth-child(4n+1), .card:nth-child(4n) { grid-column: span 7; }
+.work.filtered .card { grid-column: span 6; }
+.photo { position: relative; height: clamp(240px, 29vw, 390px); background: var(--raised); border: 1px solid var(--line); overflow: hidden; transition: border-color .2s ease; }
+.card:hover .photo { border-color: var(--gold); }
+.photo svg, .photo img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.photo img { object-fit: cover; }
+.slot { position: absolute; top: 10px; left: 10px; font-size: .78rem; line-height: 1.3; padding: 2px 8px; border: 1px dashed var(--gold); color: var(--gold-bright); background: var(--raised); }
+.info { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 28px; align-items: flex-start; }
+.info > div { min-width: 0; }
+.info .place { color: var(--muted); font-size: 1rem; }
+.info .label { padding-bottom: 3px; }
+.info h3 { font-size: 1.6rem; }
+.info dl { display: flex; gap: 22px; }
+.info dt { font-size: .68rem; line-height: 1.5; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.info dd { font: 400 1.1rem/1.3 var(--display); font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
+@media (max-width: 820px) {
+  .work { grid-template-columns: minmax(0, 1fr); }
+  .card, .card:nth-child(4n+1), .card:nth-child(4n), .work.filtered .card { grid-column: auto; }
+  .photo { height: 56vw; min-height: 210px; }
+}
+
+.credits { margin-top: 26px; max-width: 90ch; font-size: .86rem; line-height: 1.55; color: var(--muted); }
+.credits a { color: var(--gold-bright); }
+
+.plan-sheet { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 36px; align-items: start; }
+.plan-box { overflow-x: auto; background: var(--raised); border: 1px solid var(--line); }
+.plan-box svg { display: block; width: 100%; min-width: 500px; max-height: 760px; margin-inline: auto; }
+.plan-info { display: grid; gap: 16px; min-width: 0; }
+.plan-info h3 { font-size: 1.8rem; }
+.plan-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 20px; }
+.plan-facts dt { font-size: .68rem; line-height: 1.5; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.plan-facts dd { font-size: 1rem; line-height: 1.35; font-weight: 400; font-variant-numeric: lining-nums; }
+table.sched { min-width: 0; font-size: .96rem; border-top: 1px solid var(--gold); font-variant-numeric: lining-nums tabular-nums; }
+table.sched th, table.sched td { padding: 5px 10px 5px 0; }
+table.sched thead th { font-size: .66rem; letter-spacing: .14em; }
+table.sched tbody tr:last-child td { font-weight: 500; color: var(--gold-bright); border-bottom: 0; }
+table.sched th:last-child, table.sched td:last-child { text-align: right; padding-right: 0; color: inherit; }
+.plan-vastu { font-size: .96rem; color: var(--muted); }
+svg .wx { stroke: var(--draw); stroke-width: 9; stroke-linecap: square; fill: none; }
+svg .wi { stroke: var(--draw); stroke-width: 5; stroke-linecap: square; fill: none; }
+svg .gap { fill: var(--raised); stroke: none; }
+svg .thin { fill: none; stroke: var(--muted); stroke-width: 1; }
+svg .cl { fill: var(--ink); stroke: none; }
+svg .pb { fill: none; stroke: var(--muted); stroke-width: 1; stroke-dasharray: 7 5; }
+svg .road { fill: var(--plaster); stroke: none; }
+svg text.rm { fill: var(--ink); font-family: var(--body); font-weight: 500; }
+svg text.rs { fill: var(--muted); font-family: var(--mono); }
+svg text.rm, svg text.rs { paint-order: stroke; stroke: var(--raised); stroke-width: 4px; stroke-linejoin: round; }
+@media (max-width: 940px) { .plan-sheet { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
+@media (max-width: 640px) {
+  .plan-box svg { min-width: 0; max-height: none; }
+  svg text.rm { font-size: 18px; }
+  svg text.rs { font-size: 14px; }
+  .filters { gap: 2px 18px; }
+  .filters button { padding-block: 9px; }
+  .table-box table { min-width: 0; }
+  .table-box thead { display: none; }
+  .table-box tbody, .table-box tr, .table-box th, .table-box td { display: block; }
+  .table-box tr { padding-block: 12px; border-bottom: 1px solid var(--line); }
+  .table-box tr:last-child { border-bottom: 0; }
+  .table-box tbody th, .table-box td { border: 0; padding: 0 0 3px; white-space: normal; }
+}
+
+.services li { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr) minmax(0, 3fr); gap: 8px 32px; padding-block: 24px; border-top: 1px solid var(--line); align-items: baseline; }
+.services li:last-child { border-bottom: 1px solid var(--line); }
+.services h3 { font-size: clamp(1.5rem, 2.5vw, 2.05rem); }
+.services .scope { font-size: .92rem; line-height: 1.5; color: var(--muted); }
+@media (max-width: 800px) { .services li { grid-template-columns: minmax(0, 1fr); } }
+
+.steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 28px; }
+.steps li { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.steps .n { font: italic 400 2.6rem/1 var(--display); color: var(--gold); font-variant-numeric: lining-nums; }
+.steps p { font-size: 1rem; color: var(--muted); }
+@media (max-width: 980px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .steps { grid-template-columns: minmax(0, 1fr); } }
+
+.table-box { overflow-x: auto; border-block: 1px solid var(--gold); }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 1.02rem; }
+th, td { text-align: left; padding: 14px 18px 14px 0; border-bottom: 1px solid var(--line); vertical-align: baseline; }
+tr:last-child th, tr:last-child td { border-bottom: 0; }
+thead th { font: 500 .72rem/1.4 var(--body); letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+tbody th { font: 400 1.22rem/1.25 var(--display); white-space: nowrap; }
+tbody td:last-child { color: var(--muted); }
+
+.about { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 56px; align-items: start; }
+.about .copy { display: grid; gap: 16px; max-width: 58ch; }
+.register { border-top: 1px solid var(--gold); }
+.register div { display: grid; grid-template-columns: 10em minmax(0, 1fr); gap: 10px; padding: 11px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.register dt { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 500; color: var(--muted); }
+.register dd { font-weight: 400; }
+@media (max-width: 860px) { .about { grid-template-columns: minmax(0, 1fr); gap: 32px; } }
+
+.contact .wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: start; }
+.contact .info-col { display: grid; gap: 20px; }
+.contact h2 { font-size: clamp(2.4rem, 5vw, 4.2rem); }
+.contact .info-col p { max-width: 40ch; font-size: 1.12rem; color: var(--muted); }
+.contact dl { display: grid; gap: 12px; }
+.contact dt { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 500; color: var(--muted); padding-bottom: 3px; }
+form { background: var(--raised); border: 1px solid var(--line); padding: 26px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+form label { display: grid; gap: 3px; font-weight: 400; font-size: .94rem; color: var(--muted); min-width: 0; }
+form .wide { grid-column: 1 / -1; }
+form input, form select, form textarea { width: 100%; font: 400 1.05rem/1.4 var(--body); color: var(--ink); background: transparent; border: 0; border-bottom: 1px solid var(--muted); border-radius: 0; padding: 7px 0; }
+form select option { background: var(--raised); color: var(--ink); }
+form input::placeholder { color: var(--muted); opacity: .7; }
+form input:focus, form select:focus, form textarea:focus { outline: 0; border-bottom-color: var(--gold-bright); box-shadow: 0 1px 0 var(--gold-bright); }
+form .btn { justify-self: start; }
+#formNote { font-size: .94rem; line-height: 1.45; color: var(--gold-bright); }
+@media (max-width: 860px) { .contact .wrap { grid-template-columns: minmax(0, 1fr); gap: 32px; } }
+@media (max-width: 480px) { form { grid-template-columns: minmax(0, 1fr); padding: 18px; } }
+
+footer { border-top: 1px solid var(--line); }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: space-between; align-items: baseline; padding-block: 22px; font-size: .92rem; color: var(--muted); }
+footer .mark { font-size: 1.1rem; color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="draft"><div class="wrap">Draft: projects, figures and contact details are samples. Replace them before launch.</div></div>
+
+<header class="top"><div class="wrap">
+  <a class="mark" href="#home">SriRaja</a>
+  <nav aria-label="Main">
+    <a href="#work">Projects</a>
+    <a href="#plans">House plans</a>
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#spec">Quality</a>
+    <a href="#about">About</a>
+    <a class="call" href="#contact">Enquire</a>
+  </nav>
+</div></header>
+
+<main id="home">
+  <div class="hero"><div class="wrap">
+    <h1>SriRaja Construction</h1>
+    <div class="hero-grid">
+      <div class="pitch">
+        <h2>From bhoomi puja to griha pravesh.</h2>
+        <p>We are a Hyderabad builder of homes, apartments and commercial buildings. One team takes your project from soil test to handover.</p>
+        <div class="btns">
+          <a class="btn" href="#work">See our projects</a>
+          <a class="btn ghost" href="#contact">Discuss your plot</a>
+        </div>
+        <ul>
+          <li><span>Contracts</span>Turnkey, or labour and material</li>
+          <li><span>Costing</span>Itemised BOQ, stage-wise payments</li>
+          <li><span>Planning</span>Vastu-aligned layouts on request</li>
+          <li><span>Permits</span>GHMC and HMDA filings through BuildNow</li>
+        </ul>
+      </div>
+
+      <figure class="draw">
+        <svg id="build" viewBox="0 0 640 440" role="img" aria-label="Front elevation of a five-level apartment block shown at the selected construction stage"></svg>
+        <ol class="stages" id="stages" aria-label="Construction stages"></ol>
+        <figcaption class="stage-note" id="note" aria-live="off"><h3 id="noteTitle"></h3><p id="noteText"></p></figcaption>
+      </figure>
+    </div>
+  </div></div>
+
+  <section id="work" class="band"><div class="wrap">
+    <div class="head">
+      <p class="label">Projects</p>
+      <h2>Buildings of every size, finished with care.</h2>
+      <p>These six projects are samples. The three photos are licensed stock images of other builders' work, and the drawings show the remaining building types.</p>
+    </div>
+    <div class="filters" id="filters" role="group" aria-label="Filter projects by type"></div>
+    <div class="work" id="grid"></div>
+    <p class="credits">Stock photos: <a href="https://commons.wikimedia.org/wiki/File:Modern_residential_architecture_with_curved_design_and_exposed_brick_in_Mysore,_India.jpg">House in Mysore</a> by Evan Lovely, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>. <a href="https://commons.wikimedia.org/wiki/File:Vernacular_styled_residential_building_in_Ayyappa_society.jpg">Residential building, Ayyappa Society</a> by iMahesh, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, cropped. <a href="https://commons.wikimedia.org/wiki/File:Hyderabad_officeBuildings_2011_HiTec_City.jpg">Office buildings, HITEC City</a> by Chris Connelly, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>, cropped.</p>
+  </div></section>
+
+  <section id="plans"><div class="wrap">
+    <div class="head">
+      <p class="label">House plans</p>
+      <h2>Single-family homes on common Hyderabad plots</h2>
+      <p>Sample working layouts, with room sizes in feet, column positions and Vastu placement. We adapt the plan to your plot, family and budget.</p>
+    </div>
+    <div class="filters" id="planTabs" role="group" aria-label="Choose a house plan"></div>
+    <div class="plan-sheet">
+      <div class="plan-box" tabindex="0" role="region" aria-label="Floor plan drawing" id="planDraw"></div>
+      <div class="plan-info">
+        <h3 id="planTitle"></h3>
+        <dl class="plan-facts" id="planFacts"></dl>
+        <table class="sched"><thead><tr><th scope="col">Room</th><th scope="col">Size (ft)</th><th scope="col">Sq ft</th></tr></thead><tbody id="planRooms"></tbody></table>
+        <p class="plan-vastu" id="planVastu"></p>
+      </div>
+    </div>
+    <p class="credits">Areas are measured to wall centre lines. Setbacks are illustrative. These sample layouts are not for construction: every project needs site-specific structural design and a plan that follows current GHMC or HMDA rules.</p>
+  </div></section>
+
+  <section id="services" class="band"><div class="wrap">
+    <div class="head">
+      <p class="label">Services</p>
+      <h2>What we build</h2>
+    </div>
+    <ul class="services">
+      <li><h3>Independent homes and villas</h3><p>Custom houses on your plot, from the first floor plan to the final coat of paint. Vastu-aligned layouts on request.</p><p class="scope">Ground to G+3<br>Turnkey or labour-and-material</p></li>
+      <li><h3>Apartments and group housing</h3><p>Stilt-plus-floors blocks for landowners and developers, including joint development projects.</p><p class="scope">S+3 and above<br>TG RERA documentation support</p></li>
+      <li><h3>Commercial buildings</h3><p>Offices, showrooms and shop-and-flat buildings, with electrical, plumbing and fire services coordinated from the start.</p><p class="scope">RCC frame, facade, MEP</p></li>
+      <li><h3>Institutional and industrial</h3><p>Schools, clinics, warehouses and factory sheds, built around your operating calendar.</p><p class="scope">RCC and pre-engineered steel</p></li>
+      <li><h3>Renovation and extensions</h3><p>Extra floors after a structural check, retrofitting, and repairs to leaking terraces and damp walls.</p><p class="scope">Structural audit first</p></li>
+    </ul>
+  </div></section>
+
+  <section id="process"><div class="wrap">
+    <div class="head">
+      <p class="label">Process</p>
+      <h2>How a project runs</h2>
+    </div>
+    <ol class="steps">
+      <li><span class="n">1</span><h3>Site visit</h3><p>We walk the plot, check documents and arrange a soil test.</p></li>
+      <li><span class="n">2</span><h3>Drawings and approvals</h3><p>Architectural and structural drawings, then the building permit through Telangana's BuildNow portal for GHMC or HMDA limits.</p></li>
+      <li><span class="n">3</span><h3>BOQ and contract</h3><p>An itemised bill of quantities, material brands in writing, and payments tied to stages.</p></li>
+      <li><span class="n">4</span><h3>Construction</h3><p>A site engineer on every job, with progress photos and a site update each week.</p></li>
+      <li><span class="n">5</span><h3>Handover</h3><p>Snag list cleared, as-built drawings and warranties handed over, with help on the occupancy certificate.</p></li>
+    </ol>
+  </div></section>
+
+  <section id="spec" class="band"><div class="wrap">
+    <div class="head">
+      <p class="label">Quality</p>
+      <h2>What goes into the structure</h2>
+      <p>The specification we work to on RCC buildings, with the check behind each line.</p>
+    </div>
+    <div class="table-box" tabindex="0" role="region" aria-label="Construction specification table">
+      <table>
+        <thead><tr><th scope="col">Item</th><th scope="col">Standard</th><th scope="col">How we check it</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Concrete</th><td>M25 minimum for structural members, higher where the design requires</td><td>Cube tests at 7 and 28 days</td></tr>
+          <tr><th scope="row">Steel</th><td>Fe 500D TMT bars from BIS-licensed makers</td><td>Test certificate checked for each lot</td></tr>
+          <tr><th scope="row">Structural design</th><td>IS 456 for RCC, IS 875 for loads</td><td>Structural engineer's sign-off</td></tr>
+          <tr><th scope="row">Earthquake resistance</th><td>IS 1893 forces with IS 13920 ductile detailing</td><td>Seismic zone confirmed for each site</td></tr>
+          <tr><th scope="row">Curing</th><td>At least 7 days wet curing, 10 days for blended cement</td><td>Logged on site by the engineer</td></tr>
+          <tr><th scope="row">Waterproofing</th><td>Terraces, toilets and sunken slabs treated before finishes</td><td>Ponding test before tiling</td></tr>
+          <tr><th scope="row">Rainwater harvesting</th><td>Recharge pit built wherever current GHMC rules require one</td><td>Checked before the occupancy certificate application</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div></section>
+
+  <section id="about"><div class="wrap about">
+    <div class="copy">
+      <p class="label">About</p>
+      <h2>A builder you can reach on any working day.</h2>
+      <p>SriRaja Construction is a Hyderabad building contractor serving families, landowners and businesses. You deal with the people responsible for your site, from the first estimate to the day you collect your keys.</p>
+      <p><span class="todo">Add: your founding story and projects delivered</span></p>
+    </div>
+    <dl class="register">
+      <div><dt>Legal name</dt><dd>SriRaja Construction</dd></div>
+      <div><dt>Established</dt><dd><span class="todo">Add year</span></dd></div>
+      <div><dt>Head office</dt><dd>Hyderabad, Telangana</dd></div>
+      <div><dt>Service areas</dt><dd><span class="todo">Add localities</span></dd></div>
+      <div><dt>GSTIN</dt><dd><span class="todo">Add number</span></dd></div>
+      <div><dt>TG RERA reg.</dt><dd><span class="todo">Add if applicable</span></dd></div>
+    </dl>
+  </div></section>
+</main>
+
+<section id="contact" class="contact band"><div class="wrap">
+  <div class="info-col">
+    <p class="label">Enquire</p>
+    <h2>Tell us about <em>your plot.</em></h2>
+    <p>Share the location and size, and what you want to build. We'll come back with next steps and a site visit date.</p>
+    <dl>
+      <div><dt>Phone and WhatsApp</dt><dd><span class="todo">+91 00000 00000</span></dd></div>
+      <div><dt>Email</dt><dd><span class="todo">info@yourdomain.in</span></dd></div>
+      <div><dt>Office</dt><dd>Hyderabad, Telangana <span class="todo">Add street address</span></dd></div>
+    </dl>
+  </div>
+  <form id="enquiry">
+    <label for="fName">Your name<input id="fName" name="name" autocomplete="name" required></label>
+    <label for="fPhone">Phone number<input id="fPhone" name="phone" type="tel" autocomplete="tel" required></label>
+    <label for="fCity">Plot location<input id="fCity" name="city" placeholder="For example, Kondapur" required></label>
+    <label for="fType">Project type
+      <select id="fType" name="type">
+        <option>Independent home or villa</option>
+        <option>Apartment building</option>
+        <option>Commercial building</option>
+        <option>School, clinic or industrial</option>
+        <option>Renovation or extension</option>
+      </select>
+    </label>
+    <label for="fSize">Plot size (sq ft)<input id="fSize" name="size" type="number" min="0" inputmode="numeric"></label>
+    <label for="fFloors">Floors planned<input id="fFloors" name="floors" placeholder="For example, G+2"></label>
+    <label class="wide" for="fMsg">Anything else we should know<textarea id="fMsg" name="message" rows="3"></textarea></label>
+    <button class="btn wide" type="submit">Send enquiry</button>
+    <p id="formNote" class="wide" hidden>This draft doesn't send enquiries yet. Connect the form to your email or WhatsApp before launch.</p>
+  </form>
+</div></section>
+
+<footer><div class="wrap">
+  <span class="mark">SriRaja Construction</span>
+  <span>&copy; 2026 SriRaja Construction. All rights reserved.</span>
+</div></footer>
+
+<script>
+(function () {
+  /* ---------- Hero elevation: drawn at 18 px per metre ---------- */
+  var STAGES = [
+    ['Bhoomi puja', 'Site surveyed, boundaries pegged and soil samples taken. Work begins on the date you choose.'],
+    ['Foundation', 'Excavation to the depth the soil report calls for. RCC footings cast and cured.'],
+    ['Plinth', 'Plinth beams tie the footings together. Anti-termite treatment and a damp-proof course go in before filling.'],
+    ['RCC frame', 'Columns and slabs rise floor by floor. Concrete cubes go for testing from each pour.'],
+    ['Brickwork', 'Walls and lintels go up, with electrical and plumbing conduits laid while the scaffold stands.'],
+    ['Finishes', 'Plaster, waterproofing, flooring, windows and paint. Parapet and terrace tanks complete.'],
+    ['Griha pravesh', 'Final inspection done, snag list cleared, keys and documents handed over. Your family moves in.']
+  ];
+  var G = 380, P = 369, FH = 54, COLS = [158, 239, 320, 401, 482];
+  function lv(i) { return P - i * FH; }
+  var out = [];
+  function layer(from, to, inner, delay) {
+    out.push('<g class="layer" data-from="' + from + '" data-to="' + to + '"' + (delay ? ' style="transition-delay:' + delay + 'ms"' : '') + '>' + inner + '</g>');
+  }
+  function rect(c, x, y, w, h, extra) { return '<rect class="' + c + '" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '"' + (extra || '') + '/>'; }
+  function line(c, a, b, d, e) { return '<line class="' + c + '" x1="' + a + '" y1="' + b + '" x2="' + d + '" y2="' + e + '"/>'; }
+  function txt(x, y, s, size, anchor) { return '<text x="' + x + '" y="' + y + '" font-size="' + (size || 12) + '"' + (anchor ? ' text-anchor="' + anchor + '"' : '') + '>' + s + '</text>'; }
+
+  var base = '<defs>' +
+    '<pattern id="grid5" width="90" height="90" patternUnits="userSpaceOnUse" y="20"><path class="fa" d="M90 0H0V90"/></pattern>' +
+    '<pattern id="bricks" width="18" height="10" patternUnits="userSpaceOnUse"><rect class="bk" width="18" height="10"/><path class="bl" d="M0 0H18M0 5H18M9 0V5M0 5V10M18 5V10"/></pattern>' +
+    '</defs>' +
+    '<rect width="640" height="440" fill="url(#grid5)"/>' +
+    rect('so', 0, G, 640, 60) + line('dh', 0, G, 640, G) +
+    line('d', 20, 424, 110, 424) + line('d', 20, 419, 20, 429) + line('d', 110, 419, 110, 429) + txt(118, 428, '5 m');
+  out.push(base);
+
+  /* Stage 0: pegs, string line, puja marker */
+  var s0 = line('d', 150, G - 14, 490, G - 14).replace('/>', ' stroke-dasharray="5 4"/>');
+  [150, 320, 490].forEach(function (x) { s0 += line('dh', x, G - 20, x, G); });
+  s0 += '<path class="ta" d="M226 ' + (G - 2) + 'c-9 0-11-7-8-12c1-2 2-3 2-5h12c0 2 1 3 2 5c3 5 1 12-8 12z"/>' +
+    '<circle class="tr" cx="226" cy="' + (G - 23) + '" r="6"/>';
+  [[210, -3], [217, -3], [235, -3], [242, -3], [249, -3]].forEach(function (p) { s0 += '<circle class="ac" cx="' + p[0] + '" cy="' + (G + p[1]) + '" r="3.2"/>'; });
+  s0 += txt(320, G - 28, 'Site pegged out, 18 m frontage', 12, 'middle');
+  layer(0, 0, s0);
+
+  /* Stage 1: excavation and footings */
+  var pits = '';
+  COLS.forEach(function (x) { pits += '<polygon class="pit" points="' + (x - 26) + ',' + G + ' ' + (x + 26) + ',' + G + ' ' + (x + 21) + ',' + (G + 38) + ' ' + (x - 21) + ',' + (G + 38) + '"/>'; });
+  layer(1, 1, pits);
+  var foot = '';
+  COLS.forEach(function (x) { foot += rect('co', x - 18, G + 27, 36, 9) + rect('co', x - 4, G, 8, 27); });
+  foot += txt(508, G + 36, '-2.00 m');
+  layer(1, 6, foot);
+
+  /* Stage 2: plinth */
+  layer(2, 6, rect('co', 150, P, 340, 11));
+
+  /* Stage 4: brick infill; stage 5: plaster covers it */
+  var walls = '', plaster = '';
+  for (var i = 1; i < 5; i++) for (var b = 0; b < 4; b++) {
+    walls += rect('', COLS[b] + 4, lv(i + 1), 73, FH, ' fill="url(#bricks)"');
+    plaster += rect('pl', COLS[b] + 4, lv(i + 1), 73, FH);
+  }
+  layer(4, 4, walls);
+  layer(5, 6, plaster);
+
+  /* Stage 3: frame, floor by floor */
+  for (var f = 0; f < 5; f++) {
+    var fr = '';
+    COLS.forEach(function (x) { fr += rect('co', x - 4, lv(f + 1), 8, FH); });
+    fr += rect('co', 150, lv(f + 1) - 2, 340, 5);
+    layer(3, 6, fr, f * 90);
+  }
+
+  /* Stage 3-4: bamboo scaffold */
+  var sc = '';
+  [126, 138, 502, 514].forEach(function (x) { sc += line('ba', x, 66, x, G); });
+  for (var y = 80; y < G; y += 27) { sc += line('ba', 122, y, 146, y) + line('ba', 494, y, 518, y); }
+  for (y = 80; y < G - 27; y += 54) { sc += line('ba', 126, y, 138, y + 27) + line('ba', 502, y, 514, y + 27); }
+  layer(3, 4, sc);
+
+  /* Stage 5: windows, balconies, parapet, terrace, gate, tree, car */
+  var fin = '', lit = '';
+  for (i = 1; i < 5; i++) {
+    [0, 3].forEach(function (bay) {
+      var x = COLS[bay], t = lv(i + 1) + 14;
+      fin += rect('gl', x + 20, t, 41, 24) + line('d', x + 40.5, t, x + 40.5, t + 24) + rect('co', x + 14, t - 5, 53, 3);
+      lit += rect('lit', x + 20, t, 41, 24);
+    });
+    [1, 2].forEach(function (bay) {
+      var x = COLS[bay], yb = lv(i), t = yb - 44;
+      fin += rect('gl', x + 26, t, 29, 44) + line('d', x + 40.5, t, x + 40.5, yb);
+      lit += rect('lit', x + 26, t, 29, 44);
+      fin += line('dh', x + 5, yb - 20, x + 76, yb - 20);
+      for (var r = x + 12; r < x + 76; r += 8) fin += line('d', r, yb - 20, r, yb);
+    });
+  }
+  var top = lv(5);
+  fin = rect('pl', 240, top - 54, 81, 54) + rect('co', 236, top - 57, 89, 3) +
+    '<rect class="ta" x="252" y="' + (top - 79) + '" width="24" height="22" rx="4"/>' +
+    '<rect class="ta" x="285" y="' + (top - 79) + '" width="24" height="22" rx="4"/>' +
+    rect('pl', 150, top - 18, 340, 18) + fin;
+  /* stilt parking cars */
+  [COLS[0] + 8, COLS[2] + 8].forEach(function (x) {
+    fin += '<path class="pl" d="M' + x + ' ' + (P - 7) + 'v-11l10-1l9-11h25l10 12l9 1v10z"/>' +
+      '<circle class="ta" cx="' + (x + 13) + '" cy="' + (P - 6) + '" r="5"/><circle class="ta" cx="' + (x + 50) + '" cy="' + (P - 6) + '" r="5"/>';
+  });
+  /* compound wall and gate */
+  fin += rect('pl', 62, G - 27, 88, 27) + rect('pl', 490, G - 27, 28, 27) + rect('co', 144, G - 34, 8, 34) + rect('co', 488, G - 34, 8, 34);
+  /* neem tree */
+  fin += line('dh', 42, G, 42, G - 44) + '<circle class="tr" cx="42" cy="' + (G - 62) + '" r="24"/><circle class="tr" cx="24" cy="' + (G - 46) + '" r="15"/><circle class="tr" cx="62" cy="' + (G - 46) + '" r="15"/>';
+  layer(5, 6, fin);
+
+  /* Stage 6: lights and marigold toran across the stilt entrance */
+  var tor = '';
+  [COLS[1], COLS[2]].forEach(function (x) {
+    for (var n = 0; n <= 10; n++) {
+      var px = x + 6 + n * 6.9, u = n / 10;
+      tor += '<circle class="ac" cx="' + px.toFixed(1) + '" cy="' + (lv(1) + 7 + 40 * u * (1 - u)).toFixed(1) + '" r="3.1"/>';
+    }
+  });
+  layer(6, 6, lit + tor);
+
+  /* Level marks from stage 3: plinth 0.60 m + 3 m per floor */
+  var marks = '';
+  for (i = 1; i <= 5; i++) {
+    var v = (0.6 + i * 3).toFixed(2);
+    marks += line('d', 524, lv(i), 536, lv(i)) + txt(540, lv(i) + 4, '+' + v);
+  }
+  layer(3, 6, marks);
+
+  var svg = document.getElementById('build');
+  svg.innerHTML = out.join('');
+  var layers = svg.querySelectorAll('.layer');
+
+  var list = document.getElementById('stages');
+  list.innerHTML = STAGES.map(function (s, n) {
+    return '<li><button type="button" data-s="' + n + '" aria-label="Stage ' + (n + 1) + ': ' + s[0] + '"><b>' + (n + 1) + '</b><span class="t">' + s[0] + '</span></button></li>';
+  }).join('');
+  var btns = list.querySelectorAll('button');
+  var noteTitle = document.getElementById('noteTitle'), noteText = document.getElementById('noteText');
+
+  function show(st) {
+    layers.forEach(function (l) {
+      l.classList.toggle('on', +l.dataset.from <= st && st <= +l.dataset.to);
+    });
+    btns.forEach(function (b, n) {
+      b.classList.toggle('done', n < st);
+      if (n === st) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+    });
+    noteTitle.textContent = STAGES[st][0];
+    noteText.textContent = STAGES[st][1];
+  }
+
+  var timer = null, note = document.getElementById('note');
+  function stop() { clearInterval(timer); timer = null; note.setAttribute('aria-live', 'polite'); }
+  list.addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) return;
+    stop();
+    show(+b.dataset.s);
+  });
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    show(6); stop();
+  } else {
+    var cur = 0; show(0);
+    timer = setInterval(function () {
+      cur += 1; show(cur);
+      if (cur === 6) stop();
+    }, 480);
+  }
+
+  /* ---------- Project drawings: every drawing at 6 px per metre, ground at y=172 ---------- */
+  var M = 6, Y0 = 172;
+  function frame(body, x, topY, label) {
+    return '<svg viewBox="0 0 320 200" aria-hidden="true"><defs><pattern id="g' + label.replace(/\W/g, '') + '" width="30" height="30" patternUnits="userSpaceOnUse" y="22"><path class="fa" d="M30 0H0V30"/></pattern></defs>' +
+      '<rect width="320" height="200" fill="url(#g' + label.replace(/\W/g, '') + ')"/>' + body + line('dh', 6, Y0, 314, Y0) +
+      line('d', 12, 188, 72, 188) + line('d', 12, 185, 12, 191) + line('d', 72, 185, 72, 191) + txt(78, 191, '10 m', 9) +
+      line('d', x - 3, topY, x + 9, topY) + txt(x + 12, topY + 3, label, 9) + '</svg>';
+  }
+  var DRAW = {
+    villa: function () {
+      var x0 = 112, w = 84, h = 19.2, b = '';
+      b += '<polygon class="pl" points="' + (x0 - 7) + ',' + (Y0 - 2 * h) + ' ' + (x0 + w / 2) + ',' + (Y0 - 2 * h - 19) + ' ' + (x0 + w + 7) + ',' + (Y0 - 2 * h) + '"/>';
+      b += rect('pl', x0, Y0 - 2 * h, w, 2 * h) + line('d', x0 - 3, Y0 - h, x0 + w + 3, Y0 - h);
+      [6, 34, 62].forEach(function (d) { b += rect('gl', x0 + d, Y0 - 2 * h + 5, 16, 9); });
+      b += rect('gl', x0 + 6, Y0 - h + 5, 16, 9) + rect('gl', x0 + 62, Y0 - h + 5, 16, 9) + rect('tr', x0 + 35, Y0 - 13, 14, 13);
+      b += rect('pl', 60, Y0 - 9, 52, 9) + rect('pl', 196, Y0 - 9, 58, 9);
+      b += line('d', 80, Y0 - 9, 80, Y0 - 26) + '<circle class="tr" cx="80" cy="' + (Y0 - 34) + '" r="10"/>';
+      return frame(b, x0 + w + 12, Y0 - 2 * h - 19, '+9.60 m');
+    },
+    flats: function () {
+      var x0 = 100, bw = 27, h = 18, b = '';
+      for (var f = 0; f < 6; f++) {
+        var yt = Y0 - (f + 1) * h;
+        if (f) b += rect('pl', x0, yt, bw * 4, h);
+        for (var i = 0; i < 4; i++) {
+          if (!f) continue;
+          if (i === 1 || i === 2) { b += rect('gl', x0 + i * bw + 8, yt + 3, 11, 15) + line('d', x0 + i * bw + 3, yt + 11, x0 + i * bw + 24, yt + 11); }
+          else b += rect('gl', x0 + i * bw + 6, yt + 5, 15, 8) + line('d', x0 + i * bw + 4, yt + 3, x0 + i * bw + 23, yt + 3);
+        }
+      }
+      for (i = 0; i <= 4; i++) b += rect('co', x0 + i * bw - 1.5, Y0 - h, 3, h);
+      b += rect('co', x0 - 2, Y0 - h - 1, bw * 4 + 4, 2) + rect('pl', x0, Y0 - 6 * h - 6, bw * 4, 6);
+      return frame(b, x0 + bw * 4 + 12, Y0 - 6 * h - 6, '+19.00 m');
+    },
+    office: function () {
+      var x0 = 88, w = 120, h = 21.6, b = '';
+      b += rect('gl', x0, Y0 - 7 * h, w, 7 * h);
+      for (var f = 1; f < 7; f++) b += line('d', x0, Y0 - f * h, x0 + w, Y0 - f * h);
+      for (var v = 12; v < w; v += 12) b += line('d', x0 + v, Y0 - 7 * h, x0 + v, Y0);
+      b += rect('pl', x0 + w, Y0 - 7 * h - 8, 24, 7 * h + 8) + rect('tr', x0 + 48, Y0 - h + 6, 24, h - 6);
+      return frame(b, x0 + w + 32, Y0 - 7 * h - 8, '+26.60 m');
+    },
+    school: function () {
+      var x0 = 34, w = 252, h = 21.6, b = '';
+      b += rect('pl', x0, Y0 - 3 * h, w, 3 * h);
+      for (var f = 0; f < 3; f++) for (var i = 0; i < 14; i++) {
+        if (i === 6 || i === 7) continue;
+        var px = x0 + 3 + i * 17.8, py = Y0 - (f + 1) * h;
+        b += '<path class="gl" d="M' + px + ' ' + (py + h) + 'v-11a6 6 0 0 1 12 0v11z"/>';
+      }
+      for (f = 1; f < 3; f++) b += line('d', x0, Y0 - f * h, x0 + w, Y0 - f * h);
+      b += rect('pl', x0 + 106, Y0 - 3 * h - 11, 40, 3 * h + 11) + rect('gl', x0 + 118, Y0 - 3 * h, 16, 3 * h - 16) + rect('tr', x0 + 116, Y0 - 13, 20, 13);
+      return frame(b, x0 + 150, Y0 - 3 * h - 11, '+12.60 m');
+    },
+    shed: function () {
+      var x0 = 40, w = 240, e = 54, r = 66, b = '';
+      b += '<polygon class="pl" points="' + x0 + ',' + Y0 + ' ' + x0 + ',' + (Y0 - e) + ' ' + (x0 + w / 2) + ',' + (Y0 - r) + ' ' + (x0 + w) + ',' + (Y0 - e) + ' ' + (x0 + w) + ',' + Y0 + '"/>';
+      for (var v = 12; v < w; v += 12) { var d = v <= w / 2 ? v : w - v; b += line('d', x0 + v, Y0, x0 + v, Y0 - e - (r - e) * d / (w / 2)); }
+      [36, 108, 180].forEach(function (d) { b += rect('tr', x0 + d, Y0 - 30, 24, 30) + line('d', x0 + d, Y0 - 24, x0 + d + 24, Y0 - 24) + line('d', x0 + d, Y0 - 18, x0 + d + 24, Y0 - 18) + line('d', x0 + d, Y0 - 12, x0 + d + 24, Y0 - 12) + line('d', x0 + d, Y0 - 6, x0 + d + 24, Y0 - 6); });
+      b += rect('co', x0 + w / 2 - 24, Y0 - r - 5, 48, 5);
+      return frame(b, x0 + w / 2 + 30, Y0 - r - 18, '+11.80 m');
+    },
+    shops: function () {
+      var x0 = 115, w = 90, g = 25, h = 18.6, b = '';
+      b += rect('pl', x0, Y0 - g - 3 * h - 6, w, 3 * h + 6) + rect('co', x0 - 3, Y0 - g - 2, w + 6, 4);
+      for (var f = 0; f < 3; f++) for (var i = 0; i < 3; i++) {
+        var px = x0 + 7 + i * 28, py = Y0 - g - (f + 1) * h + 5;
+        b += rect('gl', px, py, 20, 9) + line('d', px - 2, py - 2, px + 22, py - 2);
+      }
+      for (i = 0; i < 3; i++) {
+        var sx = x0 + i * 30;
+        b += rect('tr', sx + 2, Y0 - g + 2, 26, g - 2);
+        for (var y = Y0 - g + 8; y < Y0; y += 5) b += line('d', sx + 2, y, sx + 28, y);
+      }
+      return frame(b, x0 + w + 12, Y0 - g - 3 * h - 6, '+14.80 m');
+    }
+  };
+  /* photo: image path. stock: true shows the "Stock photo" tag. Remove stock when using your own site photos.
+     A project with no photo shows its drawing. */
+  var PROJECTS = [
+    { cat: 'Residential', draw: 'villa', photo: 'images/house.jpg', stock: true, name: 'Single-family house', place: 'Sample details', area: '3,200', floors: 'G+1', time: '11 mo' },
+    { cat: 'Residential', draw: 'flats', photo: 'images/five-storey.jpg', stock: true, name: 'Five-storey apartment block', place: 'Sample details', area: '30,000', floors: 'G+4', time: '20 mo' },
+    { cat: 'Commercial', draw: 'office', photo: 'images/commercial.jpg', stock: true, name: 'Commercial office campus', place: 'Sample details', area: '56,000', floors: 'G+6', time: '26 mo' },
+    { cat: 'Commercial', draw: 'shops', photo: '', name: 'Shop-and-flat building', place: 'Sample, Dilsukhnagar', area: '11,500', floors: 'G+3', time: '14 mo' },
+    { cat: 'Institutional', draw: 'school', photo: '', name: 'School block', place: 'Sample, Miyapur', area: '16,000', floors: 'G+2', time: '13 mo' },
+    { cat: 'Industrial', draw: 'shed', photo: '', name: 'Pre-engineered warehouse', place: 'Sample, Patancheru', area: '32,000', floors: 'Single', time: '8 mo' }
+  ];
+  var grid = document.getElementById('grid');
+  grid.innerHTML = PROJECTS.map(function (p) {
+    var media = p.photo ? '<img src="' + p.photo + '" alt="Stock photo representing a ' + p.name.toLowerCase() + '">' + (p.stock ? '<span class="slot">Stock photo, not our project</span>' : '') : DRAW[p.draw]();
+    return '<article class="card" data-cat="' + p.cat + '"><div class="photo">' + media + '</div>' +
+      '<div class="info"><div><p class="label">' + p.cat + '</p><h3>' + p.name + '</h3><p class="place">' + p.place + '</p></div>' +
+      '<dl><div><dt>Sq ft</dt><dd>' + p.area + '</dd></div><div><dt>Floors</dt><dd>' + p.floors + '</dd></div><div><dt>Build</dt><dd>' + p.time + '</dd></div></dl></div></article>';
+  }).join('');
+
+  var cats = ['All', 'Residential', 'Commercial', 'Institutional', 'Industrial'];
+  var filters = document.getElementById('filters');
+  filters.innerHTML = cats.map(function (c, n) { return '<button type="button" data-c="' + c + '" aria-pressed="' + (n === 0) + '">' + c + '</button>'; }).join('');
+  filters.addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) return;
+    filters.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+    grid.classList.toggle('filtered', b.dataset.c !== 'All');
+    grid.querySelectorAll('.card').forEach(function (c) { c.hidden = b.dataset.c !== 'All' && c.dataset.cat !== b.dataset.c; });
+  });
+
+  /* ---------- House plans: coordinates in feet from the house's north-west corner, x east, y south ---------- */
+  var FT = 14;
+  function stair() {
+    var w = [[3, 5, 10, 5]], t = [];
+    for (var x = 3; x <= 10; x += 1) { t.push([x, 0, x, 10]); }
+    return { walls: w, treads: t };
+  }
+  var PLANS = [
+    {
+      tab: '30 × 40 ft, East facing', title: '2-bedroom ground-floor home',
+      plot: [40, 30], road: 'E', house: [3, 3, 32, 24],
+      facts: [['Plot', '30 × 40 ft (133 sq yd)'], ['Facing', 'East road'], ['Built-up', '768 sq ft'], ['Floors', 'Ground only'], ['Columns', '14, RCC frame'], ['Walls', '9 in outer, 4.5 in inner'], ['Floor height', '10 ft'], ['Build time', '6 to 8 months (sample)']],
+      walls: [[12, 0, 12, 24], [20, 0, 20, 5], [20, 14, 20, 24], [0, 12, 12, 12], [12, 5, 20, 5], [12, 17, 20, 17], [20, 14, 32, 14], [27, 0, 27, 5], [27, 5, 32, 5]],
+      doors: [['v', 32, 7, 3.5, -1], ['v', 12, 7, 3, -1], ['v', 12, 13.5, 3, -1], ['v', 12, 19, 2.5, 1], ['h', 14.5, 5, 2.5, 1], ['v', 20, 14.5, 2.5, 1], ['h', 28.25, 5, 2.5, 1]],
+      wins: [['h', 4, 0, 4], ['h', 15, 0, 1.5], ['h', 22, 0, 3], ['h', 29, 0, 1.5], ['h', 4, 24, 4], ['h', 15.5, 24, 1.5], ['h', 24, 24, 4], ['v', 0, 4, 4], ['v', 0, 16, 4], ['v', 32, 17, 4], ['v', 32, 11, 2]],
+      cols: [[0, 0], [12, 0], [20, 0], [32, 0], [0, 12], [12, 5], [20, 5], [12, 17], [20, 14], [32, 14], [0, 24], [12, 24], [20, 24], [32, 24]],
+      rooms: [['Bedroom 2', 6, 6, '12 × 12', 144], ['Master bedroom', 6, 18, '12 × 12', 144], ['Toilet 1', 16, 2.5, '8 × 5', 40], ['Dining', 16, 11, '8 × 12', 96], ['Toilet 2, attached', 17.2, 20.5, '8 × 7', 56], ['Living', 24, 9, '12 × 14, less pooja', 143], ['Pooja', 29.5, 2.5, '5 × 5', 25], ['Kitchen', 26, 19, '12 × 10', 120]],
+      total: 768, vastu: 'Vastu placement: east entrance, pooja in the north-east, kitchen in the south-east, master bedroom in the south-west.'
+    },
+    {
+      tab: '30 × 50 ft, North facing, ground', title: '5-bedroom G+1 home, ground floor',
+      plot: [30, 50], road: 'N', house: [3, 5, 24, 42],
+      facts: [['Plot', '30 × 50 ft (167 sq yd)'], ['Facing', 'North road'], ['Built-up', '1,008 sq ft ground, 1,851 sq ft total'], ['Floors', 'G+1'], ['Columns', '13, RCC frame'], ['Walls', '9 in outer, 4.5 in inner'], ['Floor height', '10 ft'], ['Build time', '10 to 12 months (sample)']],
+      walls: [[10, 0, 10, 27], [0, 10, 10, 10], [0, 15, 10, 15], [0, 27, 24, 27], [10, 14, 13, 14], [21, 14, 24, 14], [19, 0, 19, 5], [19, 5, 24, 5], [6, 27, 6, 32], [0, 32, 6, 32], [13, 27, 13, 42], [13, 38, 24, 38]],
+      stair: true,
+      doors: [['h', 13, 0, 3.5, 1], ['v', 10, 11, 2.5, -1], ['v', 10, 16, 3, -1], ['h', 10.2, 27, 2.6, 1], ['h', 16, 27, 3, 1], ['h', 14, 38, 2.5, 1], ['v', 6, 28, 2.5, 1], ['h', 20.25, 5, 2.5, 1]],
+      opens: [['v', 10, 3, 4]],
+      wins: [['h', 3, 0, 4], ['h', 21, 0, 1.5], ['v', 24, 7, 4], ['v', 24, 18, 5], ['v', 24, 30, 4], ['v', 24, 39, 2], ['v', 0, 12, 1.5], ['v', 0, 19, 4], ['v', 0, 29, 1.5], ['v', 0, 36, 4], ['h', 3, 42, 5], ['h', 18, 42, 3]],
+      cols: [[0, 0], [10, 0], [24, 0], [0, 15], [10, 14], [24, 14], [0, 27], [10, 27], [13, 27], [24, 27], [0, 42], [13, 42], [24, 42]],
+      rooms: [['Stair', 6.5, 2.5, '10 × 10', 100], ['Living', 16, 9, '14 × 14, less pooja', 171], ['Pooja', 21.5, 2.5, '5 × 5', 25], ['Toilet 1', 5, 12.5, '10 × 5', 50], ['Bedroom 2', 5, 22.5, '10 × 12', 120], ['Dining', 17, 20.5, '14 × 13', 182], ['Kitchen', 18.5, 32.5, '11 × 11', 121], ['Utility', 20, 40, '11 × 4', 44], ['Toilet 2', 3, 29.5, '6 × 5', 30], ['Master bedroom', 6.5, 37, '13 × 15, less toilet', 165]],
+      total: 1008, vastu: 'Vastu placement: north entrance, pooja in the north-east, kitchen in the south-east, master bedroom in the south-west.'
+    },
+    {
+      tab: '30 × 50 ft, North facing, first', title: '5-bedroom G+1 home, first floor',
+      plot: [30, 50], road: 'N', house: [3, 5, 24, 42],
+      facts: [['Plot', '30 × 50 ft (167 sq yd)'], ['Facing', 'North road'], ['Built-up', '843 sq ft first, 1,851 sq ft total'], ['Floors', 'G+1'], ['Open terrace', '165 sq ft'], ['Walls', '9 in outer, 4.5 in inner'], ['Floor height', '10 ft'], ['Build time', '10 to 12 months (sample)']],
+      walls: [[10, 0, 10, 27], [0, 10, 10, 10], [0, 15, 10, 15], [0, 27, 13, 27], [10, 14, 24, 14], [13, 14, 13, 42], [13, 27, 24, 27], [6, 27, 6, 32], [0, 32, 6, 32]],
+      stair: true,
+      doors: [['v', 10, 11, 2.5, -1], ['h', 10.25, 14, 2.5, 1], ['v', 13, 17, 3, 1], ['v', 10, 16, 3, -1], ['h', 10.25, 27, 2.5, 1], ['v', 6, 28, 2.5, 1], ['v', 13, 34, 3, 1]],
+      opens: [['v', 10, 3, 4]],
+      wins: [['h', 3, 0, 4], ['h', 14, 0, 6], ['v', 24, 6, 5], ['v', 24, 18, 5], ['v', 0, 12, 1.5], ['v', 0, 19, 4], ['v', 0, 29, 1.5], ['v', 0, 36, 4], ['h', 3, 42, 5]],
+      cols: [[0, 0], [10, 0], [24, 0], [0, 15], [10, 14], [24, 14], [0, 27], [10, 27], [13, 27], [24, 27], [0, 42], [13, 42], [24, 42]],
+      rooms: [['Stair', 6.5, 2.5, '10 × 10', 100], ['Family lounge', 17, 7, '14 × 14', 196], ['Toilet 1', 5, 12.5, '10 × 5', 50], ['Bedroom 3', 5, 22.5, '10 × 12', 120], ['Passage', 0, 0, '3 × 13', 39, true], ['Bedroom 4', 19, 22.5, '11 × 13', 143], ['Toilet 2', 3, 29.5, '6 × 5', 30], ['Bedroom 5', 6.5, 37, '13 × 15, less toilet', 165], ['Open terrace', 19.5, 31, 'not counted', 0, false, true]],
+      total: 843, vastu: 'Vastu placement: lighter open space kept to the north, heavier bedroom mass to the south-west.'
+    }
+  ];
+  function planSvg(p) {
+    var mL = 40, mT = p.road === 'N' ? 74 : 44, mR = p.road === 'E' ? 86 : 44, mB = 62;
+    var W = p.plot[0] * FT + mL + mR, H = p.plot[1] * FT + mT + mB;
+    var hx = mL + p.house[0] * FT, hy = mT + p.house[1] * FT;
+    function X(v) { return hx + v * FT; }
+    function Y(v) { return hy + v * FT; }
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + p.title + ', floor plan">';
+    var px = p.plot[0] * FT, py = p.plot[1] * FT;
+    if (p.road === 'E') {
+      s += rect('road', mL + px + 8, mT, 40, py) + '<text class="rs" font-size="11" text-anchor="middle" transform="translate(' + (mL + px + 32) + ' ' + (mT + py / 2) + ') rotate(90)">ROAD, EAST SIDE</text>';
+    } else {
+      s += rect('road', mL, 16, px, 40) + '<text class="rs" font-size="11" text-anchor="middle" x="' + (mL + px / 2) + '" y="40">ROAD, NORTH SIDE</text>';
+    }
+    s += rect('pb', mL, mT, px, py);
+    /* plot dimensions */
+    s += line('thin', mL, mT + py + 16, mL + px, mT + py + 16) + line('thin', mL, mT + py + 11, mL, mT + py + 21) + line('thin', mL + px, mT + py + 11, mL + px, mT + py + 21);
+    s += '<text class="rs" font-size="11" text-anchor="middle" x="' + (mL + px / 2) + '" y="' + (mT + py + 20) + '">' + p.plot[0] + ' ft</text>';
+    s += line('thin', mL - 16, mT, mL - 16, mT + py) + line('thin', mL - 21, mT, mL - 11, mT) + line('thin', mL - 21, mT + py, mL - 11, mT + py);
+    s += '<text class="rs" font-size="11" text-anchor="middle" transform="translate(' + (mL - 12) + ' ' + (mT + py / 2) + ') rotate(-90)">' + p.plot[1] + ' ft</text>';
+    /* scale bar and north arrow */
+    var sy = mT + py + 44;
+    s += line('thin', mL, sy, mL + 10 * FT, sy) + line('thin', mL, sy - 4, mL, sy + 4) + line('thin', mL + 10 * FT, sy - 4, mL + 10 * FT, sy + 4) + '<text class="rs" font-size="11" x="' + (mL + 10 * FT + 8) + '" y="' + (sy + 4) + '">10 ft</text>';
+    var ax = mL + px - 10;
+    s += '<path class="ac" d="M' + ax + ' ' + (sy - 13) + 'l6 15l-6 -4l-6 4z"/><text class="rs" font-size="11" text-anchor="middle" x="' + ax + '" y="' + (sy + 15) + '">N</text>';
+    /* stair treads go under the walls */
+    if (p.stair) {
+      var st = stair();
+      st.treads.forEach(function (t) { s += line('thin', X(t[0]), Y(t[1]), X(t[2]), Y(t[3])); });
+      st.walls.forEach(function (t) { s += line('wi', X(t[0]), Y(t[1]), X(t[2]), Y(t[3])); });
+    }
+    p.walls.forEach(function (w) { s += line('wi', X(w[0]), Y(w[1]), X(w[2]), Y(w[3])); });
+    s += rect('wx', X(0), Y(0), p.house[2] * FT, p.house[3] * FT);
+    (p.opens || []).forEach(function (o) { s += rect('gap', X(o[1]) - 5, Y(o[2]), 10, o[3] * FT); });
+    p.wins.forEach(function (w) {
+      if (w[0] === 'h') {
+        s += rect('gap', X(w[1]), Y(w[2]) - 6, w[3] * FT, 12) + line('thin', X(w[1]), Y(w[2]) - 4.5, X(w[1] + w[3]), Y(w[2]) - 4.5) + line('thin', X(w[1]), Y(w[2]), X(w[1] + w[3]), Y(w[2])) + line('thin', X(w[1]), Y(w[2]) + 4.5, X(w[1] + w[3]), Y(w[2]) + 4.5);
+      } else {
+        s += rect('gap', X(w[1]) - 6, Y(w[2]), 12, w[3] * FT) + line('thin', X(w[1]) - 4.5, Y(w[2]), X(w[1]) - 4.5, Y(w[2] + w[3])) + line('thin', X(w[1]), Y(w[2]), X(w[1]), Y(w[2] + w[3])) + line('thin', X(w[1]) + 4.5, Y(w[2]), X(w[1]) + 4.5, Y(w[2] + w[3]));
+      }
+    });
+    p.doors.forEach(function (d) {
+      var x = X(d[1]), y = Y(d[2]), L = d[3] * FT, dir = d[4];
+      if (d[0] === 'h') {
+        s += rect('gap', x, y - 6, L, 12) + line('d', x, y, x, y + dir * L) + '<path class="thin" d="M' + (x + L) + ' ' + y + 'A' + L + ' ' + L + ' 0 0 ' + (dir > 0 ? 1 : 0) + ' ' + x + ' ' + (y + dir * L) + '"/>';
+      } else {
+        s += rect('gap', x - 6, y, 12, L) + line('d', x, y, x + dir * L, y) + '<path class="thin" d="M' + x + ' ' + (y + L) + 'A' + L + ' ' + L + ' 0 0 ' + (dir > 0 ? 0 : 1) + ' ' + (x + dir * L) + ' ' + y + '"/>';
+      }
+    });
+    p.cols.forEach(function (c) { s += rect('cl', X(c[0]) - 5, Y(c[1]) - 5, 10, 10); });
+    p.rooms.forEach(function (r) {
+      if (r[5]) return;
+      s += '<text class="rm" font-size="13" text-anchor="middle" x="' + X(r[1]) + '" y="' + Y(r[2]) + '">' + r[0].split(',')[0] + '</text>';
+      if (!r[6]) s += '<text class="rs" font-size="11" text-anchor="middle" x="' + X(r[1]) + '" y="' + (Y(r[2]) + 15) + '">' + r[3].split(',')[0] + '</text>';
+    });
+    return s + '</svg>';
+  }
+  var planTabs = document.getElementById('planTabs');
+  planTabs.innerHTML = PLANS.map(function (p, n) { return '<button type="button" data-p="' + n + '" aria-pressed="' + (n === 0) + '">' + p.tab + '</button>'; }).join('');
+  function showPlan(n) {
+    var p = PLANS[n];
+    document.getElementById('planDraw').innerHTML = planSvg(p);
+    document.getElementById('planTitle').textContent = p.title;
+    document.getElementById('planFacts').innerHTML = p.facts.map(function (f) { return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('');
+    document.getElementById('planRooms').innerHTML = p.rooms.filter(function (r) { return !r[6]; }).map(function (r) {
+      return '<tr><td>' + r[0] + '</td><td>' + r[3] + '</td><td>' + r[4] + '</td></tr>';
+    }).join('') + '<tr><td>Total built-up</td><td></td><td>' + p.total.toLocaleString('en-IN') + '</td></tr>';
+    document.getElementById('planVastu').textContent = p.vastu;
+  }
+  showPlan(0);
+  planTabs.addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) return;
+    planTabs.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+    showPlan(+b.dataset.p);
+  });
+
+  document.getElementById('enquiry').addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.getElementById('formNote').hidden = false;
+  });
+})();
+</script>
+</body>
+</html>
