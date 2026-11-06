@@ -1,6 +1,6 @@
 # SriRaja Construction website
 
-Next.js and React site, exported as static files and hosted on GitHub Pages.
+Next.js and React site, hosted on Vercel.
 
 ## Run locally
 
@@ -17,7 +17,7 @@ npm run dev
 - `public/images/`: photos
 - `app/globals.css`: colours, fonts, layout
 
-Pushing to `main` builds and deploys automatically.
+Pushing to `main` deploys to production. Other branches get Vercel preview links.
 
 ## Before final launch
 

@@ -28,7 +28,7 @@ export default function Contact() {
             </div>
           </dl>
         </div>
-        {/* Not connected yet. Static hosting needs a form service, or an API route on a server host. */}
+        {/* Not connected yet. Add an API route in app/api/enquiry to send enquiries by email. */}
         <form
           className="enquiry"
           onSubmit={(e) => {
