@@ -573,3 +573,7 @@ h3 { font-weight: 500; }
   .hero-side { padding-right: 40px; }
   .build-rail { padding-right: 42px; }
 }
+
+/* Charminar mark sizing */
+.brand-mark { width: 54px; height: 54px; }
+@media (max-width: 640px) { .brand-mark { width: 44px; height: 44px; } }
