@@ -3,19 +3,19 @@
 import { useEffect, useRef, useState } from "react";
 
 const tabs = [
-  ["about", "About"],
+  ["why", "Why SriRaja"],
+  ["explore", "Explore in 3D"],
   ["stages", "How we build"],
-  ["work", "Projects"],
   ["plans", "House plans"],
-  ["services", "Services"],
-  ["process", "Process"],
-  ["spec", "Quality"],
+  ["estimate", "Estimator"],
+  ["work", "How we work"],
   ["faq", "FAQs"],
+  ["gallery", "Gallery"],
   ["contact", "Contact"],
 ];
 
 export default function SectionTabs() {
-  const [active, setActive] = useState("about");
+  const [active, setActive] = useState("why");
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -33,7 +33,9 @@ export default function SectionTabs() {
   useEffect(() => {
     const nav = navRef.current;
     const link = nav?.querySelector<HTMLElement>(`[href="#${active}"]`);
-    if (nav && link) nav.scrollTo({ left: link.offsetLeft - nav.offsetLeft - 20, behavior: "smooth" });
+    if (nav && link && nav.scrollWidth > nav.clientWidth) {
+      nav.scrollTo({ left: link.offsetLeft - nav.offsetLeft - 20, behavior: "smooth" });
+    }
   }, [active]);
 
   return (

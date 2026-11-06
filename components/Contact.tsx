@@ -7,25 +7,16 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <section id="contact" className="contact dark">
+    <section id="contact" className="contact">
       <div className="wrap">
         <div className="info-col">
           <p className="label">Enquire</p>
           <h2>Tell us about your plot</h2>
           <p>Share the location and size, and what you want to build. We&apos;ll come back with next steps and a site visit date.</p>
           <dl>
-            <div>
-              <dt>Phone and WhatsApp</dt>
-              <dd>{site.phone ? <a href={`tel:${site.phone}`}>{site.phone}</a> : <span className="todo">+91 00000 00000</span>}</dd>
-            </div>
-            <div>
-              <dt>Email</dt>
-              <dd>{site.email ? <a href={`mailto:${site.email}`}>{site.email}</a> : <span className="todo">Add email address</span>}</dd>
-            </div>
-            <div>
-              <dt>Office</dt>
-              <dd>{site.streetAddress || <>{site.city} <span className="todo">Add street address</span></>}</dd>
-            </div>
+            {site.phone && <div><dt>Phone and WhatsApp</dt><dd><a href={`tel:${site.phone}`}>{site.phone}</a></dd></div>}
+            {site.email && <div><dt>Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>}
+            <div><dt>Office</dt><dd>{site.streetAddress || site.city}</dd></div>
           </dl>
         </div>
         {/* Not connected yet. Add an API route in app/api/enquiry to send enquiries by email. */}
@@ -52,9 +43,9 @@ export default function Contact() {
           <label>Plot size (sq ft)<input name="size" type="number" min="0" inputMode="numeric" /></label>
           <label>Floors planned<input name="floors" placeholder="For example, G+2" /></label>
           <label className="wide">Anything else we should know<textarea name="message" rows={3} /></label>
-          <button className="btn wide" type="submit">Send enquiry</button>
+          <button className="btn wide" type="submit"><span>Send enquiry</span></button>
           {submitted && (
-            <p className="form-note wide" role="status">This draft doesn&apos;t send enquiries yet, so your details were not sent.</p>
+            <p className="form-note wide" role="status">Online enquiries aren&apos;t connected yet, so your details were not sent.</p>
           )}
         </form>
       </div>

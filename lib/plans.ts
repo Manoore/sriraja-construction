@@ -5,6 +5,7 @@ export type Room = { name: string; x?: number; y?: number; size: string; area: n
 
 export type Plan = {
   tab: string;
+  cover: [string, string];
   title: string;
   plot: [number, number];
   road: "E" | "N";
@@ -27,6 +28,7 @@ const northColumns: [number, number][] = [[0, 0], [10, 0], [24, 0], [0, 15], [10
 export const plans: Plan[] = [
   {
     tab: "30 × 40 ft, East facing",
+    cover: ["30 × 40 ft", "East facing"],
     title: "2-bedroom ground-floor home",
     plot: [40, 30],
     road: "E",
@@ -51,6 +53,7 @@ export const plans: Plan[] = [
   },
   {
     tab: "30 × 50 ft, North facing, ground",
+    cover: ["30 × 50 ft", "Ground floor"],
     title: "5-bedroom G+1 home, ground floor",
     ...northPlot,
     facts: [["Plot", "30 × 50 ft (167 sq yd)"], ["Facing", "North road"], ["Built-up", "1,008 sq ft ground, 1,851 sq ft total"], ["Floors", "G+1"], ["Columns", "13, RCC frame"], ["Walls", "9 in outer, 4.5 in inner"], ["Floor height", "10 ft"], ["Build time", "10 to 12 months (sample)"]],
@@ -77,6 +80,7 @@ export const plans: Plan[] = [
   },
   {
     tab: "30 × 50 ft, North facing, first",
+    cover: ["30 × 50 ft", "First floor"],
     title: "5-bedroom G+1 home, first floor",
     ...northPlot,
     facts: [["Plot", "30 × 50 ft (167 sq yd)"], ["Facing", "North road"], ["Built-up", "843 sq ft first, 1,851 sq ft total"], ["Floors", "G+1"], ["Open terrace", "165 sq ft"], ["Walls", "9 in outer, 4.5 in inner"], ["Floor height", "10 ft"], ["Build time", "10 to 12 months (sample)"]],

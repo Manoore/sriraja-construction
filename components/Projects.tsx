@@ -1,65 +1,75 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useState } from "react";
-import { credits, projects } from "@/lib/content";
-import { drawings } from "./ProjectDrawings";
+import { useLenis } from "lenis/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useEffect, useState } from "react";
+import { projects, type Project } from "@/lib/content";
+import { MaskedWords, Reveal } from "./Motion";
 
-const CATEGORIES = ["All", "Residential", "Commercial", "Institutional", "Industrial"];
+const ViewerScene = dynamic(() => import("./three/ViewerScene"), { ssr: false });
 
 export default function Projects() {
-  const [filter, setFilter] = useState("All");
-  const shown = projects.filter((p) => filter === "All" || p.category === filter);
+  const [viewing, setViewing] = useState<Project | null>(null);
+  const [active, setActive] = useState(0);
+  const lenis = useLenis();
+
+  useEffect(() => {
+    if (!viewing) return;
+    lenis?.stop();
+    const esc = (e: KeyboardEvent) => e.key === "Escape" && setViewing(null);
+    window.addEventListener("keydown", esc);
+    return () => {
+      lenis?.start();
+      window.removeEventListener("keydown", esc);
+    };
+  }, [viewing, lenis]);
 
   return (
-    <section id="work" className="cream">
+    <section id="explore" className="cream">
       <div className="wrap">
         <div className="head">
-          <p className="label">Projects</p>
-          <h2>Buildings of every size, finished with care</h2>
-          <p>These six projects are samples. The three photos are licensed stock images of other builders&apos; work, and the drawings show the remaining building types.</p>
+          <MaskedWords text="Explore every building type in 3D." />
+          <Reveal><p>Choose a building type, then drag to look around its scale model.</p></Reveal>
         </div>
-        <div className="filters" role="group" aria-label="Filter projects by type">
-          {CATEGORIES.map((c) => (
-            <button key={c} type="button" aria-pressed={filter === c} onClick={() => setFilter(c)}>{c}</button>
+        <Reveal className="panels">
+          {projects.map((p, i) => (
+            <button
+              key={p.name}
+              type="button"
+              className={`panel${i === active ? " on" : ""}`}
+              onMouseEnter={() => setActive(i)}
+              onFocus={() => setActive(i)}
+              onClick={() => setViewing(p)}
+              aria-label={`Open 3D model: ${p.name}`}
+            >
+              <Image src={p.image} alt="" fill sizes="(max-width: 760px) 100vw, 45vw" />
+              <span className="panel-title">{p.name}</span>
+              <span className="panel-more">
+                <span>{p.text}</span>
+                <span className="panel-scope">{p.scope}</span>
+              </span>
+              <span className="panel-play" aria-hidden="true">3D</span>
+            </button>
           ))}
-        </div>
-        <div className="work">
-          {shown.map((p) => {
-            const Drawing = p.drawing ? drawings[p.drawing] : null;
-            return (
-              <article className="card" key={p.name}>
-                <div className="photo">
-                  {p.photo ? (
-                    <Image src={p.photo} alt={`Photo representing a ${p.name.toLowerCase()}`} fill sizes="(max-width: 600px) 100vw, (max-width: 940px) 50vw, 33vw" />
-                  ) : (
-                    Drawing && <Drawing />
-                  )}
-                  {p.stock && <span className="stock-tag">Stock photo, not our project</span>}
-                </div>
-                <div>
-                  <p className="cat">{p.category}</p>
-                  <h3>{p.name}</h3>
-                  <p className="where">{p.place}</p>
-                  <dl>
-                    <div><dt>Sq ft</dt><dd>{p.area}</dd></div>
-                    <div><dt>Floors</dt><dd>{p.floors}</dd></div>
-                    <div><dt>Build</dt><dd>{p.time}</dd></div>
-                  </dl>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-        <p className="credits">
-          Stock photos:{" "}
-          {credits.map((c) => (
-            <span key={c.href}>
-              <a href={c.href}>{c.label}</a> by {c.author}, <a href={c.licenseHref}>{c.license}</a>{c.note}.{" "}
-            </span>
-          ))}
-        </p>
+        </Reveal>
       </div>
+
+      <AnimatePresence>
+        {viewing && (
+          <motion.div className="viewer dark" role="dialog" aria-modal="true" aria-label={`3D model of ${viewing.name}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <ViewerScene name={viewing.model} />
+            <div className="viewer-bar">
+              <div>
+                <h3>{viewing.name}</h3>
+                <p>Concept scale model. Drag to rotate, scroll or pinch to zoom.</p>
+              </div>
+              <button type="button" className="btn" autoFocus onClick={() => setViewing(null)}><span>Close</span></button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

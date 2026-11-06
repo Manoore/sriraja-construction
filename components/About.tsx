@@ -1,60 +1,81 @@
-import Image from "next/image";
-import { site } from "@/lib/site";
+"use client";
 
-const stats = [
-  ["7", "Stages from bhoomi puja to griha pravesh"],
-  ["28", "Day concrete cube tests"],
-  ["5", "Types of building work"],
+import Image from "next/image";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { useEffect, useState } from "react";
+import { site } from "@/lib/site";
+import { MaskedWords, Reveal } from "./Motion";
+
+const SLIDES = [
+  { image: "/images/apartment.jpg", title: "One accountable team", text: "You deal with the people responsible for your site, from the first estimate to the day you collect your keys. Drawings, approvals and construction stay under one roof." },
+  { image: "/images/facade.jpg", title: "Tested, not assumed", text: "Every project starts with a soil test. Concrete cubes are tested at 7 and 28 days, and a structural engineer signs off on the design." },
+  { image: "/images/office.jpg", title: "Costs you can follow", text: "An itemised bill of quantities sets out materials and brands in writing. Payments follow construction stages, with a site update each week." },
 ];
 
-function Field({ label, value, add }: { label: string; value: string; add: string }) {
+function Arrow({ direction }: { direction: "left" | "right" }) {
   return (
-    <div>
-      <dt>{label}</dt>
-      <dd>{value || <span className="todo">{add}</span>}</dd>
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+      <path d={direction === "left" ? "M15 5l-7 7 7 7" : "M9 5l7 7-7 7"} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/** Centred introduction shown directly below the hero, above the section tabs. */
+export function Intro() {
+  return (
+    <div className="intro">
+      <Reveal className="wrap">
+        <p>A home or building reflects everything you value: your family, your work and your future. {site.name} builds homes, apartments and commercial buildings across Hyderabad, with care in every stage from foundation to finish.</p>
+        <p className="intro-strong">Build it once. Build it right.</p>
+      </Reveal>
     </div>
   );
 }
 
 export default function About() {
+  const [index, setIndex] = useState(0);
+  const [auto, setAuto] = useState(true);
+  const reduced = useReducedMotion();
+  const slide = SLIDES[index];
+  const go = (next: number) => {
+    setAuto(false);
+    setIndex((next + SLIDES.length) % SLIDES.length);
+  };
+
+  useEffect(() => {
+    if (!auto || reduced) return;
+    const t = setInterval(() => setIndex((i) => (i + 1) % SLIDES.length), 6500);
+    return () => clearInterval(t);
+  }, [auto, reduced]);
+
   return (
-    <section id="about">
+    <section id="why">
       <div className="wrap">
-        <div className="about">
-          <div className="copy">
-            <p className="label">{site.name}</p>
-            <h2>A builder you can reach on any working day</h2>
-            <p>
-              {site.name} is a Hyderabad building contractor serving families, landowners and businesses. You deal with the
-              people responsible for your site, from the first estimate to the day you collect your keys.
-            </p>
-            <p><span className="todo">Add: your founding story and projects delivered</span></p>
-            <dl className="register" style={{ width: "100%" }}>
-              <Field label="Established" value={site.established} add="Add year" />
-              <Field label="Head office" value={site.city} add="Add city" />
-              <Field label="Service areas" value={site.serviceAreas} add="Add localities" />
-              <Field label="GSTIN" value={site.gstin} add="Add number" />
-              <Field label="TG RERA reg." value={site.rera} add="Add if applicable" />
-            </dl>
-          </div>
-          <div className="collage">
-            <div className="a">
-              <Image src="/images/five-storey.jpg" alt="Stock photo of an apartment building" fill sizes="(max-width: 860px) 80vw, 35vw" />
-              <span className="stock-tag">Stock photos</span>
-            </div>
-            <div className="b">
-              <Image src="/images/house.jpg" alt="Stock photo of a family house" fill sizes="(max-width: 860px) 60vw, 28vw" />
-            </div>
-          </div>
+        <div className="head">
+          <MaskedWords text="Why families and businesses build with us." />
         </div>
-        <div className="stats">
-          {stats.map(([n, text]) => (
-            <div className="stat" key={text}>
-              <span className="ghost" aria-hidden="true">{n}</span>
-              <b>{n}</b>
-              <span>{text}</span>
+        <div className="carousel" role="group" aria-roledescription="carousel" aria-label="Reasons to build with SriRaja">
+          <div className="carousel-frame">
+            <AnimatePresence initial={false}>
+              <motion.div key={slide.image} className="carousel-slide" initial={{ opacity: 0, scale: 1.05 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
+                <Image src={slide.image} alt="" fill sizes="(max-width: 1200px) 100vw, 1160px" />
+                <h3>{slide.title}</h3>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+          <div className="carousel-controls">
+            <button type="button" aria-label="Previous" onClick={() => go(index - 1)}><Arrow direction="left" /></button>
+            <div className="carousel-dots">
+              {SLIDES.map((s, i) => <button key={s.title} type="button" aria-label={`Show ${s.title}`} aria-current={i === index} onClick={() => go(i)} />)}
             </div>
-          ))}
+            <button type="button" aria-label="Next" onClick={() => go(index + 1)}><Arrow direction="right" /></button>
+          </div>
+          <AnimatePresence mode="wait">
+            <motion.p key={slide.title} className="carousel-text" aria-live={auto ? "off" : "polite"} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+              {slide.text}
+            </motion.p>
+          </AnimatePresence>
+          <p className="carousel-facts">7 construction stages | 28-day cube tests | 5 types of building work</p>
         </div>
       </div>
     </section>

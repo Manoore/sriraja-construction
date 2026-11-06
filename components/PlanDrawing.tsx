@@ -49,8 +49,8 @@ export default function PlanDrawing({ plan: p }: { plan: Plan }) {
           <line className="wi" x1={X(3)} y1={Y(5)} x2={X(10)} y2={Y(5)} />
         </>
       )}
-      {p.walls.map((w) => <line key={w.join()} className="wi" x1={X(w[0])} y1={Y(w[1])} x2={X(w[2])} y2={Y(w[3])} />)}
-      <rect className="wx" x={X(0)} y={Y(0)} width={p.house[2] * FT} height={p.house[3] * FT} />
+      {p.walls.map((w) => <line key={w.join()} className="wi draw-in" pathLength={1} x1={X(w[0])} y1={Y(w[1])} x2={X(w[2])} y2={Y(w[3])} />)}
+      <rect className="wx draw-in" pathLength={1} x={X(0)} y={Y(0)} width={p.house[2] * FT} height={p.house[3] * FT} />
 
       {p.opens?.map((o) => <rect key={o.join()} className="gap" x={X(o[1]) - 5} y={Y(o[2])} width="10" height={o[3] * FT} />)}
 

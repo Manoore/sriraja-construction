@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { Bodoni_Moda, IBM_Plex_Mono, Jost, Mukta } from "next/font/google";
+import { Bodoni_Moda, IBM_Plex_Mono, Inter } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
 
 const bodoni = Bodoni_Moda({ subsets: ["latin"], variable: "--font-bodoni" });
-const jost = Jost({ subsets: ["latin"], variable: "--font-jost" });
-const mukta = Mukta({ subsets: ["latin"], weight: ["300", "400", "500", "600"], variable: "--font-mukta" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const plex = IBM_Plex_Mono({ subsets: ["latin"], weight: "400", variable: "--font-plex" });
 
 export const metadata: Metadata = {
@@ -17,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${bodoni.variable} ${jost.variable} ${mukta.variable} ${plex.variable}`}>
+    <html lang="en" className={`${bodoni.variable} ${inter.variable} ${plex.variable}`}>
       <body>{children}</body>
     </html>
   );

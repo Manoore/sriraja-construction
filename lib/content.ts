@@ -1,24 +1,22 @@
+import type { ModelName } from "@/components/three/Models";
+
 export type Project = {
   category: "Residential" | "Commercial" | "Institutional" | "Industrial";
   name: string;
-  place: string;
-  area: string;
-  floors: string;
-  time: string;
-  /** Photo path in public/. Without one, the drawing is shown. */
-  photo?: string;
-  /** Shows the stock-photo tag. Remove when using your own site photos. */
-  stock?: boolean;
-  drawing?: "shops" | "school" | "shed";
+  text: string;
+  scope: string;
+  image: string;
+  imageKind: "Representative photo" | "Concept model";
+  model: ModelName;
 };
 
 export const projects: Project[] = [
-  { category: "Residential", photo: "/images/house.jpg", stock: true, name: "Single-family house", place: "Sample details", area: "3,200", floors: "G+1", time: "11 mo" },
-  { category: "Residential", photo: "/images/five-storey.jpg", stock: true, name: "Five-storey apartment block", place: "Sample details", area: "30,000", floors: "G+4", time: "20 mo" },
-  { category: "Commercial", photo: "/images/commercial.jpg", stock: true, name: "Commercial office campus", place: "Sample details", area: "56,000", floors: "G+6", time: "26 mo" },
-  { category: "Commercial", drawing: "shops", name: "Shop-and-flat building", place: "Sample, Dilsukhnagar", area: "11,500", floors: "G+3", time: "14 mo" },
-  { category: "Institutional", drawing: "school", name: "School block", place: "Sample, Miyapur", area: "16,000", floors: "G+2", time: "13 mo" },
-  { category: "Industrial", drawing: "shed", name: "Pre-engineered warehouse", place: "Sample, Patancheru", area: "32,000", floors: "Single", time: "8 mo" },
+  { category: "Residential", name: "Independent home", text: "Custom family homes and villas, planned around your plot and lifestyle.", scope: "Ground to G+3", image: "/images/villa.jpg", imageKind: "Representative photo", model: "villa" },
+  { category: "Residential", name: "Five-storey apartment block", text: "Efficient, well-lit apartment buildings for landowners and developers.", scope: "G+4 and above", image: "/images/apartment.jpg", imageKind: "Representative photo", model: "apartment" },
+  { category: "Commercial", name: "Commercial office", text: "Office buildings with structure, facade and services coordinated from day one.", scope: "RCC frame, facade, MEP", image: "/images/office.jpg", imageKind: "Representative photo", model: "office" },
+  { category: "Commercial", name: "Shop-and-flat building", text: "Street-level shops with homes above, a practical choice for main-road plots.", scope: "G+2 to G+4", image: "/renders/shops.jpg", imageKind: "Concept model", model: "shops" },
+  { category: "Institutional", name: "School block", text: "Bright classrooms and open corridors, phased around the academic calendar.", scope: "G to G+3", image: "/renders/school.jpg", imageKind: "Concept model", model: "school" },
+  { category: "Industrial", name: "Pre-engineered warehouse", text: "Fast-build steel sheds with loading docks and clear internal spans.", scope: "PEB and RCC", image: "/renders/warehouse.jpg", imageKind: "Concept model", model: "warehouse" },
 ];
 
 export const services = [
@@ -57,7 +55,6 @@ export const faqs = [
 ];
 
 export const credits = [
-  { label: "House in Mysore", href: "https://commons.wikimedia.org/wiki/File:Modern_residential_architecture_with_curved_design_and_exposed_brick_in_Mysore,_India.jpg", author: "Evan Lovely", license: "CC BY 2.0", licenseHref: "https://creativecommons.org/licenses/by/2.0", note: "" },
-  { label: "Residential building, Ayyappa Society", href: "https://commons.wikimedia.org/wiki/File:Vernacular_styled_residential_building_in_Ayyappa_society.jpg", author: "iMahesh", license: "CC BY-SA 4.0", licenseHref: "https://creativecommons.org/licenses/by-sa/4.0", note: ", cropped" },
-  { label: "Office buildings, HITEC City", href: "https://commons.wikimedia.org/wiki/File:Hyderabad_officeBuildings_2011_HiTec_City.jpg", author: "Chris Connelly", license: "CC BY 2.0", licenseHref: "https://creativecommons.org/licenses/by/2.0", note: ", cropped" },
+  { label: "Kurt Kaiser on Wikimedia Commons", href: "https://commons.wikimedia.org/wiki/File:DC_modern_apartment_at_dusk.jpg" },
+  { label: "rawpixel", href: "https://www.rawpixel.com/public-domain" },
 ];

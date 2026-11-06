@@ -1,21 +1,21 @@
 import { faqs } from "@/lib/content";
+import { MaskedWords, Reveal } from "./Motion";
 
 export default function Faq() {
   return (
     <section id="faq">
       <div className="wrap">
         <div className="head">
-          <p className="label">FAQs</p>
-          <h2>Frequently asked questions</h2>
+          <MaskedWords text="Frequently asked questions." />
         </div>
-        <div className="faq">
+        <Reveal className="faq">
           {faqs.map((f) => (
             <details key={f.q}>
               <summary>{f.q}</summary>
               <p>{f.a}</p>
             </details>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );
